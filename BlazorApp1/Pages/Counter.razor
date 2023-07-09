@@ -1,0 +1,40 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<!-- This is how to load a XAML control and register an event.
+     You can replace 'Button' with your own UserControl. -->
+
+<XamlForBlazor.XamlElement Type="typeof(System.Windows.Controls.Button)"
+                           Content="Click me"
+                           Click="@Button_Click"
+                           FontSize="16" />
+
+<!-- This is a XAML textblock: -->
+<XamlForBlazor.XamlElement Type="typeof(System.Windows.Controls.TextBlock)"
+                           Text="@currentCount"
+                           FontSize="16" />
+
+<!-- This is the default Razor button: -->
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        currentCount++;
+        base.StateHasChanged();
+        System.Windows.MessageBox.Show("Remember the good old MessageBox?");
+    }
+}
